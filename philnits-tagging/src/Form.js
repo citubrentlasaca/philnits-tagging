@@ -79,8 +79,23 @@ function Form() {
                 ];
             }
 
-            // Upload answer image to Firebase Storage and get download URL
+            // Find the selected choice
+            let selectedChoiceIndex = -1;
+            for (let i = 1; i <= 4; i++) {
+                const checkbox = document.querySelector(`#choiceImage${i}Checkbox`);
+                if (checkbox && checkbox.checked) {
+                    selectedChoiceIndex = i;
+                    break;
+                }
+            }
+
+            // Use the selected choice's URL as the answerURL
             let answerURL = "";
+            if (selectedChoiceIndex !== -1) {
+                answerURL = choiceURLs[selectedChoiceIndex - 1];
+            }
+
+            // Upload answer image to Firebase Storage and get download URL
             if (selectedChoice === 'image' && selectedImage5) {
                 const answerRef = ref(storage, `answers/${randomDocumentName}`);
                 await uploadBytes(answerRef, selectedImage5);
@@ -307,24 +322,29 @@ function Form() {
                                 <img src={URL.createObjectURL(selectedImage1)} alt="Choice 1" />
                             </div>
                         )}
+                        <input type="checkbox" id='choiceImage1Checkbox' />
                         <input type="file" accept="image/*" onChange={handleImage2Change} id='choiceImage2' />
                         {selectedImage2 && (
                             <div>
                                 <img src={URL.createObjectURL(selectedImage2)} alt="Choice 2" />
                             </div>
+
                         )}
+                        <input type="checkbox" id='choiceImage2Checkbox' />
                         <input type="file" accept="image/*" onChange={handleImage3Change} id='choiceImage3' />
                         {selectedImage3 && (
                             <div>
                                 <img src={URL.createObjectURL(selectedImage3)} alt="Choice 3" />
                             </div>
                         )}
+                        <input type="checkbox" id='choiceImage3Checkbox' />
                         <input type="file" accept="image/*" onChange={handleImage4Change} id='choiceImage4' />
                         {selectedImage4 && (
                             <div>
                                 <img src={URL.createObjectURL(selectedImage4)} alt="Choice 4" />
                             </div>
                         )}
+                        <input type="checkbox" id='choiceImage4Checkbox' />
                     </div>
                 )}
 
@@ -352,13 +372,16 @@ function Form() {
                         />
                     </div>
                 ) : (
-                    <div>
-                        <input type="file" accept="image/*" onChange={handleImage5Change} id='answerImage' />
-                        {selectedImage5 && (
-                            <div>
-                                <img src={URL.createObjectURL(selectedImage5)} alt="Answer" />
-                            </div>
-                        )}
+                    <div
+                        sx={{
+                            width: '100%',
+                        }}
+                    >
+                        <input type='text' placeholder='Answer' id='answer' disabled
+                            style={{
+                                width: '100%'
+                            }}
+                        />
                     </div>
                 )}
 
