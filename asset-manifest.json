@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/philnits-tagging/static/css/main.073c9b0a.css",
+    "main.js": "/philnits-tagging/static/js/main.0501ba4b.js",
+    "index.html": "/philnits-tagging/index.html",
+    "main.073c9b0a.css.map": "/philnits-tagging/static/css/main.073c9b0a.css.map",
+    "main.0501ba4b.js.map": "/philnits-tagging/static/js/main.0501ba4b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.0501ba4b.js"
+  ]
+}
